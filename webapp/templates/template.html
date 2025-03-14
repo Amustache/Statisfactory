@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="h-100">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Template</title>
-</head>
-<body>
 
+    <!-- Bootstrap core CSS -->
+    <link href="{{url_for('static', filename='css/bootstrap/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/bootstrap-icons/font/bootstrap-icons.min.css')}}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100" style="background-color: #0f0e0f;">
+
+<header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #454545;">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+        <i class="bi bi-window-sidebar"></i>
+        Statisfactory Real-Life Interface
+    </a>
+    <div class="navbar-nav" style="background-color: #575757;">
+        <div class="nav-item text-nowrap">
+            <span class="nav-link active px-5"><i class="bi bi-x-lg"></i></span>
+        </div>
+    </div>
+</header>
+
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+</main>
+
+<script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
 </body>
 </html>
