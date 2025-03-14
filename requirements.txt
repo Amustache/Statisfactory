@@ -1,0 +1,7 @@
+Flask==3.1.0
+black
+isort
+pre-commit
+pre-commit-hooks
+pylint
+bump2version
