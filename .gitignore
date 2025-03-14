@@ -1,4 +1,6 @@
 config.py
+vcs.xml
+workspace.xml
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux,python,pycharm+all,flask
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,linux,python,pycharm+all,flask
