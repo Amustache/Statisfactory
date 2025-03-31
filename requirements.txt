@@ -5,3 +5,5 @@ pre-commit
 pre-commit-hooks
 pylint
 bump2version
+
+selenium~=4.29.0
