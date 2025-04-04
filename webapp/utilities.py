@@ -85,9 +85,7 @@ def to_human(cur_prod: dict):
     return items
 
 
-CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT0gbP8t-D1dW6tAErn2WYvfJ-e0KokkGiFxXLAet3QC5fQGai9afTuv_082jFZU7luQ7SK7Pfccu5/pub?gid=1978893223&single=true&output=csv"
-
-
+# CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT0gbP8t-D1dW6tAErn2WYvfJ-e0KokkGiFxXLAet3QC5fQGai9afTuv_082jFZU7luQ7SK7Pfccu5/pub?gid=1978893223&single=true&output=csv"
 # from webapp.utilities import download_expand_and_save_funfacts, CSV_URL;download_expand_and_save_funfacts(CSV_URL, "funfacts.csv")
 def download_expand_and_save_funfacts(csv_url: str, save_path: str):
     with requests.Session() as s:

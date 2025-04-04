@@ -14,7 +14,7 @@ def create_app(config_class=Config):
 
     @app.route("/")
     def main():
-        cur_item = request.args.get("cur_item")
+        cur_item = request.args.get("cur_item") or "iron"
 
         # Get latest
         cur_prod = read_result(app.config["PARSED_SAVE_FILE"])

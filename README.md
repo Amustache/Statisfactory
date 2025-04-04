@@ -15,10 +15,12 @@ Webapp to visualise statistics about resources consumption in game and their rea
 ### Usage
 
 1. Activate venv if not done alread: `source env/bin/activate`
-2. Launch webapp: `python webapp/main.py`
+2. Launch webapp: `python wsgi.py`
 3. Access localhost: https://0.0.0.0:8008 (or whatever address you configured)
 
 ## Documentation
+
+You can generate a new funfacts file using `download_expand_and_save_funfacts` in `webapp.utilities`.
 
 ### Resources
 
