@@ -10,7 +10,7 @@ class Config:
     SERVER_HOST = "0.0.0.0"
     SERVER_PORT = 8008
 
-    PARSED_SAVE_FILE = "production.json"
+    PARSED_SAVE_FILE = os.path.join(basedir, "production.json")
     TIME_BETWEEN_SAVES = 60 * 5
     GOOGLE_EQUIV = "https://docs.google.com/...&output=csv"
     FUNFACTS_FILE = os.path.join(basedir, "funfacts.csv")
