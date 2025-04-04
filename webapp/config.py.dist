@@ -1,7 +1,14 @@
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-DEBUG = True
-SECRET_KEY = "SATISFACTORY IS COOL AND GOOD"  # Change that...
-HOSTNAME = "0.0.0.0"
-PORT = 8008
+
+
+class Config:
+    DEBUG = True
+    SECRET_KEY = "SATISFACTORY IS COOL AND GOOD"  # Change that...
+
+    SERVER_HOST = "0.0.0.0"
+    SERVER_PORT = 8008
+
+    PARSED_SAVE_FILE = "production.json"
+    TIME_BETWEEN_SAVES = 60 * 5

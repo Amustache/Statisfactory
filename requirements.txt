@@ -1,6 +1,7 @@
 Flask==3.1.0
 black
 isort
+pandas==2.2.3
 pre-commit
 pre-commit-hooks
 pylint

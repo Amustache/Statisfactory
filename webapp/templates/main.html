@@ -1,124 +1,148 @@
 <!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <title>Statisfactory Real-Life Interface</title>
+  <meta charset="utf-8">
+  <title>Statisfactory Real-Life Interface</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{url_for('static', filename='css/bootstrap/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/bootstrap-icons/font/bootstrap-icons.min.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/custom.css')}}" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/bootstrap-icons/font/bootstrap-icons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="dashboard.css" rel="stylesheet">
+
+  <!-- Cute fading -->
+  <style>
+      #content {
+          opacity: 0;
+          animation: fadeIn 2s forwards;
+      }
+
+      @keyframes fadeIn {
+          to {
+              opacity: 1;
+          }
+      }
+  </style>
 </head>
 <body class="body-grid satisfactory-text-white">
-
+<!-- Top -->
 <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow satisfactory-grey">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
-        <i class="bi bi-graph-up-arrow"></i>
-        Statisfactory - Aggrégation de Données Normalisées
-    </a>
-    <div class="navbar-nav satisfactory-light-grey">
-        <div class="nav-item text-nowrap">
-            <span class="nav-link px-5"><i class="bi bi-x-lg"></i></span>
-        </div>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+    <i class="bi bi-graph-up-arrow"></i>
+    Statisfactory - Aggrégation de Données Normalisées
+  </a>
+  <div class="navbar-nav satisfactory-light-grey">
+    <div class="nav-item text-nowrap">
+      <span class="nav-link px-5"><i class="bi bi-x-lg"></i></span>
     </div>
+  </div>
 </header>
 
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-md-3 col-lg-2 d-md-block sidebar satisfactory-bg">
-            <div class="position-sticky">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Minerai de fer</strong>
-                            <small>3.21 Gt</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Minerai de cuivre</strong>
-                            <small>6.54 Gt</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Calcaire</strong>
-                            <small>9.87 Gt</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Charbon</strong>
-                            <small>4.79 Gt</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-orange">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Eau</strong>
-                            <small>4.64 m3</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Pétrol brut</strong>
-                            <small>7.46 m3</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Minerai de catérium (or)</strong>
-                            <small>3.46 Gt</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Bauxite</strong>
-                            <small>6.46 Gt</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Quartz brut</strong>
-                            <small>1.54 Gt</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Sulfure</strong>
-                            <small>7.46 Gt</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Uranium</strong>
-                            <small>6.85 Gt</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item satisfactory-bg satisfactory-text-white">
-                        <div class="d-flex w-100 justify-content-between">
-                            <strong class="mb-1">Bois (Biomasse)</strong>
-                            <small>9.68 Gt</small>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+<div id="main" class="container-fluid">
+  <div class="row">
+    <nav id="menu" class="col-md-3 col-lg-2 d-md-block sidebar satisfactory-bg">
+      <div class="position-sticky">
+        <ul class="list-group list-group-flush">
+          {% for item, info in items.items() %}
+            <li id="li-{{ item }}"
+                class="list-group-item {% if cur_item == item %}satisfactory-orange{% else %}satisfactory-bg satisfactory-text-white{% endif %}">
+              <div class="d-flex w-100 justify-content-between">
+                <strong class="mb-1">{{ info.name }}</strong>
+                <small>{{ to_prefix(info['production_previous'] * info['ig_to_irl'], info['irl_unit'])[3] }}/min</small>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </nav>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Dashboard</h1>
-            </div>
-            <div class="row">
-                <div class="col-6">dsfs</div>
-                <div class="col-6">sdfd</div>
-            </div>
-        </main>
-    </div>
+    <main id="content" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      {% set cur_info = items[cur_item] %}
+      <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h4">Panneau de contrôle</h1>
+      </div>
+      <div class="row mb-2 text-center">
+        <p>Depuis le début de la partie</p>
+        <div class="col-6">
+          <p>Environ</p>
+          <p class="lead">
+            <strong>
+              <span id="num"></span> {{ cur_info["irl_unit"] }}
+            </strong>
+          </p>
+          <p>
+            {% if cur_item in ["water", "uranium"] %}d'{% else %}de {% endif %}<strong>{{ cur_info.name }}</strong> ont
+            été extrait{% if cur_info["irl_unit"] == "t" %}e{% endif %}s.
+          </p>
+          <img src="{{ url_for('static', filename='img/items/' ~ cur_item ~ '.png') }}"/>
+        </div>
+        <div class="col-6">
+          <p>C'est l'équivalent de</p>
+          <p class="lead"><strong>XXX</strong></p>
+          <img src="{{ url_for('static', filename='img/' ~ cur_item ~ '.png') }}"/>
+        </div>
+      </div>
+    </main>
+  </div>
 </div>
 
-<script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script>
+    let elapsing =
+    {{ elapsing }} *
+    1000;
+    let debug_elapsing = 2000;
+
+    /* source: https://codepen.io/duvander/pen/KXOpXw */
+    /* Call this function with a string containing the ID name to
+     * the element containing the number you want to do a count animation on.
+     *
+     * Speed of animation (milliseconds timeout between each number increase)
+     */
+
+    function increaseNumberAnimation(elementId, startNumber, endNumber, speed = (endNumber - startNumber + 1) / elapsing / 1000) {
+        const element = document.getElementById(elementId)
+
+        if (!element) return
+
+        /* A dataset variable that is added to the animated element*/
+        const animationRunning = JSON.parse(element.dataset.animationRunning ?? false)
+
+        if (animationRunning) return
+
+        element.dataset.animationRunning = true
+
+        incNbrRec(startNumber, endNumber, element, speed)
+    }
+
+    /*A recursive function to increase the number.*/
+    function incNbrRec(currentNumber, endNumber, element, speed) {
+        if (currentNumber <= endNumber) {
+            element.innerHTML = parseInt(currentNumber).toLocaleString(
+                undefined,
+                {minimumFractionDigits: 0});
+            setTimeout(function () {
+                incNbrRec(currentNumber + 1, endNumber, element, speed)
+            }, speed) //Delay a bit before calling the function again.
+        } else {
+            element.dataset.animationRunning = false
+        }
+    }
+
+    /*Call this funtion with the ID-name for that element to increase the number within*/
+    /* {{ to_prefix(cur_info['total_previous'] * cur_info['ig_to_irl'], cur_info['irl_unit'])[1] }} */
+    let startNum = {{cur_info['total_previous'] * cur_info['ig_to_irl']}};
+    let endNum = {{cur_info['total_current'] * cur_info['ig_to_irl']}};
+    increaseNumberAnimation("num", startNum, endNum, debug_elapsing / (endNum - startNum));
+</script>
+<script>
+    let next_item = `{{ next_item }}`;
+    setTimeout(function () {
+        document.location = '/?cur_item=' + next_item;
+    }, debug_elapsing);
+</script>
 </body>
 </html>
