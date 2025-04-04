@@ -1,3 +1,5 @@
+import pandas as pd
+
 PREFIXES = {
     3: ("kilo", "k"),
     6: ("mega", "M"),
@@ -10,6 +12,7 @@ PREFIXES = {
     27: ("ronna", "R"),
     30: ("quetta", "Q"),
 }
+
 ITEMS = {
     "iron": {
         "name": "Minerai de fer",
@@ -83,4 +86,20 @@ ITEMS = {
         "irl_unit": "t",
         "ig_to_irl": 1,
     },
+}
+
+MULTIPLIERS = {
+    0.25: "L'équivalent du quart de ",
+    0.5: "L'équivalent de la moitié de ",
+    0.75: "L'équivalent des trois quarts de ",
+    1: "L'équivalent de ",
+    2: "L'équivalent de 2 fois ",
+    3: "L'équivalent de 3 fois ",
+    4: "L'équivalent de 4 fois ",
+    5: "L'équivalent de 5 fois ",
+    6: "L'équivalent de 6 fois ",
+    7: "L'équivalent de 7 fois ",
+    8: "L'équivalent de 8 fois ",
+    9: "L'équivalent de 9 fois ",
+    10: "L'équivalent de 10 fois ",
 }

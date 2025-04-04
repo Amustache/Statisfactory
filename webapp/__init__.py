@@ -2,7 +2,7 @@ from pprint import pprint
 from flask import Flask, render_template, request
 from webapp.config import Config
 from webapp.constants import ITEMS
-from webapp.results_parser import read_result, to_prefix, to_human
+from webapp.utilities import read_result, to_prefix, to_human, get_closest_funfact
 
 
 def create_app(config_class=Config):
@@ -29,12 +29,16 @@ def create_app(config_class=Config):
         item_keys = list(cur_prod.keys())
         next_item = item_keys[(item_keys.index(cur_item) + 1) % len(item_keys)]
 
+        average_total = cur_prod[cur_item]["ig_to_irl"] * (cur_prod[cur_item]["total_previous"] + cur_prod[cur_item]["total_current"]) / 2
+        funfact = get_closest_funfact(app.config["FUNFACTS_FILE"], cur_item, average_total)
+
         return render_template(
             "main.html",
             items=cur_prod,
             cur_item=cur_item,
             next_item=next_item,
-            elapsing=app.config["TIME_BETWEEN_SAVES"]
+            elapsing=5 if app.config["DEBUG"] else app.config["TIME_BETWEEN_SAVES"],
+            funfact=funfact,
         )
 
     return app

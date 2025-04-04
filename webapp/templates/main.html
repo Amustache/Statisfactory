@@ -80,9 +80,13 @@
           <img src="{{ url_for('static', filename='img/items/' ~ cur_item ~ '.png') }}"/>
         </div>
         <div class="col-6">
-          <p>C'est l'équivalent de</p>
-          <p class="lead"><strong>XXX</strong></p>
-          <img src="{{ url_for('static', filename='img/' ~ cur_item ~ '.png') }}"/>
+          {% if funfact %}
+            <p>{{ funfact.previous }}</p>
+            <p class="lead"><strong>{{ funfact.main }}</strong></p>
+            <p>({{ to_prefix(funfact.value, cur_info["irl_unit"])[1] }} {{ cur_info["irl_unit"] }})</p>
+            <p class="small">{% if funfact.source %}Source : {{ funfact.source }}{% endif %}</p>
+            <img src="{{ url_for('static', filename='img/illustrations' ~ funfact.illustration ~ '.png') }}"/>
+          {% endif %}
         </div>
       </div>
     </main>
@@ -94,7 +98,6 @@
     let elapsing =
     {{ elapsing }} *
     1000;
-    let debug_elapsing = 2000;
 
     /* source: https://codepen.io/duvander/pen/KXOpXw */
     /* Call this function with a string containing the ID name to
@@ -136,13 +139,13 @@
     /* {{ to_prefix(cur_info['total_previous'] * cur_info['ig_to_irl'], cur_info['irl_unit'])[1] }} */
     let startNum = {{cur_info['total_previous'] * cur_info['ig_to_irl']}};
     let endNum = {{cur_info['total_current'] * cur_info['ig_to_irl']}};
-    increaseNumberAnimation("num", startNum, endNum, debug_elapsing / (endNum - startNum));
+    increaseNumberAnimation("num", startNum, endNum, elapsing / (endNum - startNum));
 </script>
 <script>
     let next_item = `{{ next_item }}`;
     setTimeout(function () {
         document.location = '/?cur_item=' + next_item;
-    }, debug_elapsing);
+    }, elapsing);
 </script>
 </body>
 </html>

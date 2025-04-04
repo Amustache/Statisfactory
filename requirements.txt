@@ -5,6 +5,7 @@ pandas==2.2.3
 pre-commit
 pre-commit-hooks
 pylint
+requests==2.32.3
 bump2version
 
 selenium~=4.29.0

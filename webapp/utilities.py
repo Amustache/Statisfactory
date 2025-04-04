@@ -1,19 +1,25 @@
+import csv
 import json
 import math
+import random
+from urllib.parse import urlparse
 
-from webapp.constants import PREFIXES, ITEMS
+import pandas as pd
+import requests
+
+from webapp.constants import PREFIXES, ITEMS, MULTIPLIERS
 
 
-def to_prefix(num: float | int, unit: str = "IGu", delimiter: str = "'"):
+def to_prefix(num: float | int, unit: str = "IGu", delimiter: str = " "):
     # (complete, text, scientific, engineer)
     # (00_000_000, "00'000'000", "0.00x10^7", "00.0 Xunit")
-    #num = int(num)
+    # num = int(num)
     if num == 0.0:
         return num, "0", "0", f"0 {unit}"
     if num < 1.0:
         return num, str(f"{num:.2f}"), str(f"{num:.2f}"), f"{num:.2f} {unit}"
 
-    #num = int(num)
+    # num = int(num)
     e = int(math.log10(num))
     if e < 3:
         match math.floor(math.log10(abs(int(num)))) + 1:
@@ -68,6 +74,7 @@ def read_result(file: str, real: bool = True):
 
     return ret  # pd.DataFrame.from_dict(ret)
 
+
 def to_human(cur_prod: dict):
     items = {}
     for item, info in cur_prod.items():
@@ -77,8 +84,49 @@ def to_human(cur_prod: dict):
 
     return items
 
-if __name__ == "__main__":
-    print(read_result("webapp/production.json"))
-    # tests = [1, 1024, 500000, 1048576, 50000000, 1073741824, 5000000000, 1099511627776, 5000000000000]
-    # for t in tests:
-    #     print(to_prefix(t))
+
+CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT0gbP8t-D1dW6tAErn2WYvfJ-e0KokkGiFxXLAet3QC5fQGai9afTuv_082jFZU7luQ7SK7Pfccu5/pub?gid=1978893223&single=true&output=csv"
+
+
+# from webapp.utilities import download_expand_and_save_funfacts, CSV_URL;download_expand_and_save_funfacts(CSV_URL, "funfacts.csv")
+def download_expand_and_save_funfacts(csv_url: str, save_path: str):
+    with requests.Session() as s:
+        # Get data
+        download = s.get(csv_url)
+        decoded_content = download.content.decode("utf-8")
+        cr = list(csv.reader(decoded_content.splitlines(), delimiter=','))
+
+        # Augment data
+        res = []
+        for c in cr[1:]:
+            for value, previous in MULTIPLIERS.items():
+                tmp = c.copy()
+                tmp[1] = float(tmp[1]) * value
+                tmp.append(previous)
+                res.append(tmp)
+
+        # Save data
+        with open(save_path, "w") as f:
+            write = csv.writer(f)
+
+            write.writerow(cr[0] + ["previous"])
+            write.writerows(res)
+
+
+def get_closest_funfact(file: str, item: str, value: float | int):
+    df = pd.read_csv(file, header=0)
+    df = df.astype({"value": float, "source": str})
+    df = df.loc[df["item"] == item].reset_index(drop=True)
+    df_sort = df.iloc[(df["value"] - value).abs().argsort()[:2]]
+    try:
+        ind = df_sort.index.tolist()[0]
+    except IndexError:
+        return None
+
+    return {
+        "previous": df.iloc[ind]["previous"],
+        "main": df.iloc[ind]["main"],
+        "value": df.iloc[ind]["value"],
+        "source": urlparse(df.iloc[ind]["source"]).netloc if df.iloc[ind]["source"] else None,
+        "illustration": df.iloc[ind]["illustration"],
+    }

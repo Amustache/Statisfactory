@@ -12,3 +12,5 @@ class Config:
 
     PARSED_SAVE_FILE = "production.json"
     TIME_BETWEEN_SAVES = 60 * 5
+    GOOGLE_EQUIV = "https://docs.google.com/...&output=csv"
+    FUNFACTS_FILE = os.path.join(basedir, "funfacts.csv")
