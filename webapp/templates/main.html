@@ -59,12 +59,14 @@
     </nav>
 
     <main id="content" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      {% set cur_info = items[cur_item] %}
       <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h4">Panneau de contrôle</h1>
       </div>
+
       <div class="row mb-2 text-center">
+        {% if cur_item != "" and cur_item in items.keys() %}
+        {% set cur_info = items[cur_item] %}
         <p>Depuis le début de la partie</p>
         <div class="col-6">
           <p>Environ</p>
@@ -88,6 +90,9 @@
             <img src="{{ url_for('static', filename='img/illustrations' ~ funfact.illustration ~ '.png') }}"/>
           {% endif %}
         </div>
+        {% else %}
+        <p class="lead">Commencez à jour au jeu pour voir apparaître les statistiques !</p>
+        {% endif %}
       </div>
     </main>
   </div>
@@ -136,10 +141,12 @@
     }
 
     /*Call this funtion with the ID-name for that element to increase the number within*/
+    {% if cur_info %}
     /* {{ to_prefix(cur_info['total_previous'] * cur_info['ig_to_irl'], cur_info['irl_unit'])[1] }} */
     let startNum = {{cur_info['total_previous'] * cur_info['ig_to_irl']}};
     let endNum = {{cur_info['total_current'] * cur_info['ig_to_irl']}};
     increaseNumberAnimation("num", startNum, endNum, elapsing / (endNum - startNum));
+    {% endif %}
 </script>
 <script>
     let next_item = `{{ next_item }}`;
